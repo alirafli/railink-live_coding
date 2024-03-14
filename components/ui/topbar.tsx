@@ -4,19 +4,19 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Button } from "./button";
+import { Button, buttonVariants } from "./button";
 
 function TopBar() {
   const pathname = usePathname();
 
   const item = [
-    { title: "Home", href: "/" },
+    { title: "Halaman Utama", href: "/" },
     {
-      title: "See Schedule",
+      title: "Liat Jadwal",
       href: "/schedule",
     },
     {
-      title: "Booking List",
+      title: "Daftar Booking",
       href: "/booking-list",
     },
   ];
@@ -50,8 +50,18 @@ function TopBar() {
             </>
           ) : (
             <>
-              <Button variant="secondary">Login</Button>
-              <Link href="/register">Register</Link>
+              <Link
+                className={buttonVariants({ variant: "default" })}
+                href="/login"
+              >
+                Login
+              </Link>
+              <Link
+                className={buttonVariants({ variant: "outline" })}
+                href="/register"
+              >
+                Register
+              </Link>
             </>
           )}
         </div>
