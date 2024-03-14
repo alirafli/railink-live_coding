@@ -11,7 +11,7 @@ export default function Schedule() {
 
   return (
     <div>
-      <ScheduleTable schedule={schedule.availabilitydatalist} />
+      <ScheduleTable schedule={schedule.availabilitydatalist ?? []} />
     </div>
   );
 }
