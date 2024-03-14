@@ -15,16 +15,27 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import useLoginUser from "@/hooks/useUser";
+import { toast } from "@/components/ui/use-toast";
 
 function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
+  const { mutateAsync } = useLoginUser();
+
   const { handleSubmit, control } = form;
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await mutateAsync({ email: values.email, password: values.password });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "gagal Login!",
+      });
+    }
   }
 
   return (
